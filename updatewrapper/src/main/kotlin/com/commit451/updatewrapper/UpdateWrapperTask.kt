@@ -10,7 +10,7 @@ import org.gradle.api.tasks.TaskAction
 open class UpdateWrapperTask : DefaultTask() {
 
     companion object {
-        const val COMMAND = "gradle wrapper --gradle-version {version}"
+        const val COMMAND = "./gradlew wrapper --gradle-version {version}"
     }
 
     init {

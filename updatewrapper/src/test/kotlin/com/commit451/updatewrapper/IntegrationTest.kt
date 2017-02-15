@@ -25,6 +25,16 @@ class IntegrationTest {
     @Test
     fun integrationTests() {
 
+
+        var process = Runtime.getRuntime().exec("ls")
+        process.waitFor()
+        System.out.println(process.inputStream.convertToString())
+
+        val command = "../gradlew wrapper --gradle-version 3.3"
+        process = Runtime.getRuntime().exec(command)
+        process.waitFor()
+        Assert.assertEquals("error on command: ${process.errorStream.convertToString()}", 0, process.exitValue())
+
         val runner = GradleRunner.create()
                 .withProjectDir(integrationRoot)
                 .withPluginClasspath()
