@@ -19,7 +19,7 @@ open class UpdateWrapperTask : DefaultTask() {
     }
 
     @Input
-    var verbose = false
+    var windows = false
 
     @TaskAction
     fun updatewrapper() {
@@ -28,7 +28,10 @@ open class UpdateWrapperTask : DefaultTask() {
         if (releaseResponse.isSuccessful) {
             val releaseName = releaseResponse.body().name
             System.out.println("Updating wrapper to version $releaseName")
-            val command = COMMAND.replace("{version}", releaseName)
+            var command = COMMAND.replace("{version}", releaseName)
+            if (windows()) {
+                command = command.replace("./gradlew", "gradlew")
+            }
             val process = Runtime.getRuntime().exec(command)
             process.waitFor()
             if (process.exitValue() == 0) {
@@ -41,8 +44,8 @@ open class UpdateWrapperTask : DefaultTask() {
         }
     }
 
-    fun verbose(): Boolean {
-        val value = System.getProperty("verbose", verbose.toString())
+    fun windows(): Boolean {
+        val value = System.getProperty("windows", windows.toString())
         return value.toBoolean()
     }
 }

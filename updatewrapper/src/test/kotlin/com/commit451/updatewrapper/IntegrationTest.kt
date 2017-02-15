@@ -1,10 +1,8 @@
 package com.commit451.updatewrapper
 
 import org.gradle.testfixtures.ProjectBuilder
-import org.gradle.testkit.runner.GradleRunner
 import org.junit.Assert
 import org.junit.Test
-import java.io.File
 
 /**
  * Test the integration
@@ -12,35 +10,11 @@ import java.io.File
  */
 class IntegrationTest {
 
-    val integrationRoot = File("src/test/integration")
-
     @Test
     fun pluginFoundTest() {
         val project = ProjectBuilder.builder().build()
         project.pluginManager.apply("com.commit451.updatewrapper")
         val task = project.tasks.getByName("updatewrapper")
         Assert.assertTrue(task is UpdateWrapperTask)
-    }
-
-    @Test
-    fun integrationTests() {
-
-
-        var process = Runtime.getRuntime().exec("ls")
-        process.waitFor()
-        System.out.println(process.inputStream.convertToString())
-
-        val command = "../gradlew wrapper --gradle-version 3.3"
-        process = Runtime.getRuntime().exec(command)
-        process.waitFor()
-        Assert.assertEquals("error on command: ${process.errorStream.convertToString()}", 0, process.exitValue())
-
-        val runner = GradleRunner.create()
-                .withProjectDir(integrationRoot)
-                .withPluginClasspath()
-                .withArguments("updatewrapper", "-Dverbose=true", "--stacktrace")
-
-        val result = runner.build()
-        Assert.assertTrue(result.output.contains("Updated gradle wrapper successfully"))
     }
 }
