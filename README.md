@@ -1,24 +1,24 @@
-# jitpacktogit
+# updatewrapper
 
-Gradle plugin that displays jitpack.io dependencies as their git URLs
+Gradle plugin that updates the gradle wrapper
 
-[![Build Status](https://travis-ci.org/Commit451/jitpack-to-git.svg?branch=master)](https://travis-ci.org/Commit451/jitpack-to-git) [![](https://jitpack.io/v/Commit451/jitpacktogit.svg)](https://jitpack.io/#Commit451/jitpacktogit)
+[![Build Status](https://travis-ci.org/Commit451/updatewrapper.svg?branch=master)](https://travis-ci.org/Commit451/updatewrapper) [![](https://jitpack.io/v/Commit451/updatewrapper.svg)](https://jitpack.io/#Commit451/updatewrapper)
 
 # Gradle Dependency
-This plugin is available via JitPack. Go figure!
+This plugin is available via JitPack
 
 ### `plugins` block:
 You can add it to your build script using the following configuration:
 ```groovy
 plugins {
-    id 'com.github.Commit451.jitpacktogit' version 'latest.version.here'
+    id 'com.github.Commit451.updatewrapper' version 'latest.version.here'
 }
 ```
 or via the
 
 ### `buildscript` block:
 ```groovy
-apply plugin: 'com.commit451.jitpacktogit'
+apply plugin: 'com.commit451.updatewrapper'
 
 buildscript {
   repositories {
@@ -27,18 +27,15 @@ buildscript {
   }
 
   dependencies {
-    classpath 'com.github.Commit451:jitpacktogit:latest.version.here'
+    classpath 'com.github.Commit451:updatewrapper:latest.version.here'
   }
 }
 ```
 
 # Usage
 ```shell
-./gradlew jitpacktogit
+./gradlew updatewrapper
 ```
-
-# Note
-This will only work for JitPack dependencies that follow the normal `com.github.{user}` structure. If the dependency is using a custom domain within JitPack, the URL will not be resolved.
 
 # Thanks
 Thanks to Ben Manes for his [versions plugin](https://github.com/ben-manes/gradle-versions-plugin) and Square for [SQLDelight](https://github.com/square/sqldelight) which were both great references for creating a Gradle plugin. The [docs](https://docs.gradle.org/current/userguide/custom_plugins.html#sec:custom_plugins_standalone_project) also helped out immensely.
