@@ -31,5 +31,6 @@ class IntegrationTest {
                 .withArguments("updatewrapper", "-Dverbose=true", "--stacktrace")
 
         val result = runner.build()
+        Assert.assertTrue(result.output.contains("Updated gradle wrapper successfully"))
     }
 }

@@ -1,6 +1,6 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 plugins {
-    id 'com.commit451.jitpacktogit'
+    id 'com.commit451.updatewrapper'
 }
 
 allprojects {
