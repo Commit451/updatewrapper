@@ -8,10 +8,6 @@ import org.gradle.api.tasks.TaskAction
  */
 open class UpdateWrapperTask : DefaultTask() {
 
-    companion object {
-        const val COMMAND_UPDATE = "./gradlew wrapper --gradle-version {version}"
-    }
-
     init {
         description = "Updates gradle wrapper to latest version"
         group = "Help"
@@ -29,7 +25,7 @@ open class UpdateWrapperTask : DefaultTask() {
             } else {
                 System.out.println("Updating wrapper to version $releaseName")
 
-                val exitValue = runUpdate(releaseName)
+                val exitValue = Helper.runUpdateCommand(releaseName)
                 if (exitValue == 0) {
                     System.out.println("Updated gradle wrapper successfully to version $releaseName")
                 } else {
@@ -39,15 +35,5 @@ open class UpdateWrapperTask : DefaultTask() {
         } else {
             System.out.println("Unable to get latest gradle version to update to")
         }
-    }
-
-    fun runUpdate(releaseName: String): Int {
-        var command = COMMAND_UPDATE.replace("{version}", releaseName)
-        if (Helper.windows()) {
-            command = command.replace("./gradlew", "gradlew")
-        }
-        val process = Runtime.getRuntime().exec(command)
-        process.waitFor()
-        return process.exitValue()
     }
 }

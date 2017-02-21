@@ -8,22 +8,32 @@ import org.gradle.internal.os.OperatingSystem
 internal object Helper {
 
     const val COMMAND_VERSION = "./gradlew --version"
+    const val COMMAND_UPDATE = "./gradlew wrapper --gradle-version {version}"
+
 
     fun getCurrentVersion(): String {
-        val output = runCommandForOutput(COMMAND_VERSION)
+        val command = if (windows()) COMMAND_VERSION.replace("./gradlew", "gradlew") else COMMAND_VERSION
+        val output = runCommandForOutput(command)
         return getVersionFromVersionOutput(output)
     }
 
     fun runCommandForOutput(command: String): String {
-        val builder = ProcessBuilder(command)
-                .inheritIO()
-                .redirectOutput(ProcessBuilder.Redirect.PIPE)
-        val process = builder.start()
+        return runCommand(command).inputStream.convertToString()
+    }
 
+    fun runCommand(command: String): Process {
+        val process = Runtime.getRuntime().exec(command)
         process.waitFor()
+        return process
+    }
 
-        val value = process.inputStream.convertToString()
-        return value
+    fun runUpdateCommand(releaseName: String): Int {
+        var command = COMMAND_UPDATE.replace("{version}", releaseName)
+        if (windows()) {
+            command = command.replace("./gradlew", "gradlew")
+        }
+        val process = runCommand(command)
+        return process.exitValue()
     }
 
     fun getVersionFromVersionOutput(text: String): String {
