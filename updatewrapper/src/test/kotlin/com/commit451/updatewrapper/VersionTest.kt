@@ -1,6 +1,7 @@
 package com.commit451.updatewrapper
 
 import org.junit.Assert
+import org.junit.Ignore
 import org.junit.Test
 
 /**
@@ -8,6 +9,8 @@ import org.junit.Test
  */
 class VersionTest {
 
+    //Ignore as I think GitHub API is rate limited by IP address
+    @Ignore
     @Test
     fun fetchVersionTest() {
         val group = "gradle"
