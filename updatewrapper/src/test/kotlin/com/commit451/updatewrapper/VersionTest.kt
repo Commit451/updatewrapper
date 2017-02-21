@@ -17,4 +17,11 @@ class VersionTest {
         val release = releaseResponse.body()
         Assert.assertNotNull(release)
     }
+
+    @Test
+    fun parseCurrentVersion() {
+        val text = Tester.getFileText("version-output.txt")
+        val version = Helper.getVersionFromVersionOutput(text)
+        Assert.assertEquals("3.3", version)
+    }
 }

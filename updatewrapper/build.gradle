@@ -12,4 +12,5 @@ dependencies {
     compile "com.squareup.retrofit2:converter-moshi:$retrofitVersion"
 
     testCompile 'junit:junit:4.12'
+    testCompile 'com.google.guava:guava:21.0'
 }
