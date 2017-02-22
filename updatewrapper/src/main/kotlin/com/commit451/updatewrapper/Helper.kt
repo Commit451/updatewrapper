@@ -8,7 +8,7 @@ import org.gradle.internal.os.OperatingSystem
 internal object Helper {
 
     const val COMMAND_VERSION = "./gradlew --version"
-    const val COMMAND_UPDATE = "./gradlew wrapper --gradle-version {version}"
+    const val COMMAND_UPDATE = "./gradlew wrapper --gradle-version {version} --distribution-type all"
 
 
     fun getCurrentVersion(): String {
