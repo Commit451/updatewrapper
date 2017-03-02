@@ -7,16 +7,6 @@ Gradle plugin that updates the gradle wrapper
 # Gradle Dependency
 This plugin is available via JitPack
 
-### `plugins` block:
-You can add it to your build script using the following configuration:
-```groovy
-plugins {
-    id 'com.github.Commit451.updatewrapper' version 'latest.version.here'
-}
-```
-or via the
-
-### `buildscript` block:
 ```groovy
 apply plugin: 'com.commit451.updatewrapper'
 
