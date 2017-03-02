@@ -12,7 +12,7 @@ internal object Helper {
 
 
     fun getCurrentVersion(): String {
-        val command = if (windows()) COMMAND_VERSION.replace("./gradlew", "gradlew") else COMMAND_VERSION
+        val command = if (windows()) COMMAND_VERSION.replace("./gradlew", "gradlew.bat") else COMMAND_VERSION
         val output = runCommandForOutput(command)
         return getVersionFromVersionOutput(output)
     }
@@ -30,7 +30,7 @@ internal object Helper {
     fun runUpdateCommand(releaseName: String): Int {
         var command = COMMAND_UPDATE.replace("{version}", releaseName)
         if (windows()) {
-            command = command.replace("./gradlew", "gradlew")
+            command = command.replace("./gradlew", "gradlew.bat")
         }
         val process = runCommand(command)
         return process.exitValue()
@@ -42,7 +42,6 @@ internal object Helper {
         val endIndex = text.indexOf("\n", startIndex)
         return text.substring(startIndex + key.length, endIndex)
     }
-
 
     fun windows(): Boolean {
         return OperatingSystem.current().isWindows
