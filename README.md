@@ -37,6 +37,15 @@ buildscript {
 ./gradlew updatewrapper
 ```
 
+# Can't You Update The Wrapper Without This Plugin?
+Yes.
+
+Basically, this plugin finds the latest version of Gradle via the GitHub API and runs the command:
+```gradle
+./gradlew wrapper --gradle-version {version} --distribution-type all
+```
+But, sometimes it is nice to just update the wrapper without having to look up the latest version.
+
 # Thanks
 Thanks to Ben Manes for his [versions plugin](https://github.com/ben-manes/gradle-versions-plugin) and Square for [SQLDelight](https://github.com/square/sqldelight) which were both great references for creating a Gradle plugin. The [docs](https://docs.gradle.org/current/userguide/custom_plugins.html#sec:custom_plugins_standalone_project) also helped out immensely.
 
