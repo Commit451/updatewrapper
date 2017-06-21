@@ -15,13 +15,17 @@ open class UpdateWrapperTask : DefaultTask() {
 
     @TaskAction
     fun updatewrapper() {
-        val gitHub = GitHubFactory.create()
-        val releaseResponse = gitHub.getLatestRelease("gradle", "gradle").execute()
+        val gradleSite = GradleSiteFactory.create()
+        val releaseResponse = gradleSite.getLatestRelease().execute()
         if (releaseResponse.isSuccessful) {
-            val releaseName = releaseResponse.body().name
+            val releaseName = releaseResponse.body()?.version
             val currentVersion = Helper.getCurrentVersion()
+            if (releaseName == null) {
+                System.out.println("Unable to fetch latest version of gradle. Please file an issue on GitHub")
+                return
+            }
             if (currentVersion == releaseName) {
-                System.out.println("Gradle wrapper is already on latest version: $releaseName")
+                System.out.println("GradleSite wrapper is already on latest version: $releaseName")
             } else {
                 System.out.println("Updating wrapper to version $releaseName")
 

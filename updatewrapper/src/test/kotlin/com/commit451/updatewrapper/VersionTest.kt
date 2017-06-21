@@ -1,7 +1,6 @@
 package com.commit451.updatewrapper
 
 import org.junit.Assert
-import org.junit.Ignore
 import org.junit.Test
 
 /**
@@ -9,16 +8,13 @@ import org.junit.Test
  */
 class VersionTest {
 
-    //Ignore as I think GitHub API is rate limited by IP address
-    @Ignore
     @Test
     fun fetchVersionTest() {
-        val group = "gradle"
-        val name = "gradle"
-        val github = GitHubFactory.create()
-        val releaseResponse = github.getLatestRelease(group, name).execute()
+        val gradleSite = GradleSiteFactory.create()
+        val releaseResponse = gradleSite.getLatestRelease().execute()
         val release = releaseResponse.body()
         Assert.assertNotNull(release)
+        Assert.assertNotNull(releaseResponse.body()?.version)
     }
 
     @Test

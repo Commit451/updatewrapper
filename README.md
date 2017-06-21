@@ -1,6 +1,6 @@
 # updatewrapper
 
-Gradle plugin that updates the gradle wrapper
+Gradle plugin that updates the gradle wrapper to the latest and greatest stable release.
 
 [![Build Status](https://travis-ci.org/Commit451/updatewrapper.svg?branch=master)](https://travis-ci.org/Commit451/updatewrapper) [![](https://jitpack.io/v/Commit451/updatewrapper.svg)](https://jitpack.io/#Commit451/updatewrapper)
 
@@ -27,10 +27,10 @@ buildscript {
 ./gradlew updatewrapper
 ```
 
-# Can't You Update The Wrapper Without This Plugin?
+## Can't You Update The Wrapper Without This Plugin?
 Yes.
 
-Basically, this plugin finds the latest version of Gradle via the GitHub API and runs the command:
+Basically, this plugin finds the latest version of Gradle via the Gradle site and runs the command:
 ```gradle
 ./gradlew wrapper --gradle-version {version} --distribution-type all
 ```
