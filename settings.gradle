@@ -1,1 +1,1 @@
-include ':updatewrapper'
+rootProject.name = 'updatewrapper'
