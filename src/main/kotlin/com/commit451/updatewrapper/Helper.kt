@@ -7,8 +7,8 @@ import org.gradle.internal.os.OperatingSystem
  */
 internal object Helper {
 
-    const val COMMAND_VERSION = "./gradlew --version"
-    const val COMMAND_UPDATE = "./gradlew wrapper --gradle-version {version} --distribution-type all"
+    private const val COMMAND_VERSION = "./gradlew --version"
+    private const val COMMAND_UPDATE = "./gradlew wrapper --gradle-version {version} --distribution-type all"
 
 
     fun getCurrentVersion(): String {
@@ -17,11 +17,11 @@ internal object Helper {
         return getVersionFromVersionOutput(output)
     }
 
-    fun runCommandForOutput(command: String): String {
+    private fun runCommandForOutput(command: String): String {
         return runCommand(command).inputStream.convertToString()
     }
 
-    fun runCommand(command: String): Process {
+    private fun runCommand(command: String): Process {
         val process = Runtime.getRuntime().exec(command)
         process.waitFor()
         return process
@@ -43,7 +43,7 @@ internal object Helper {
         return text.substring(startIndex + key.length, endIndex)
     }
 
-    fun windows(): Boolean {
+    private fun windows(): Boolean {
         return OperatingSystem.current().isWindows
     }
 }

@@ -10,11 +10,8 @@ class VersionTest {
 
     @Test
     fun fetchVersionTest() {
-        val gradleSite = GradleSiteFactory.create()
-        val releaseResponse = gradleSite.getLatestRelease().execute()
-        val release = releaseResponse.body()
+        val release = GradleVersionGetter.version()
         Assert.assertNotNull(release)
-        Assert.assertNotNull(releaseResponse.body()?.version)
     }
 
     @Test

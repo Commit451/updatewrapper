@@ -4,7 +4,7 @@ import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.TaskAction
 
 /**
- * The task that actually converts things
+ * The task that actually does things
  */
 open class UpdateWrapperTask : DefaultTask() {
 
@@ -13,19 +13,14 @@ open class UpdateWrapperTask : DefaultTask() {
         group = "Help"
     }
 
+    @Suppress("unused")
     @TaskAction
     fun updatewrapper() {
-        val gradleSite = GradleSiteFactory.create()
-        val releaseResponse = gradleSite.getLatestRelease().execute()
-        if (releaseResponse.isSuccessful) {
-            val releaseName = releaseResponse.body()?.version
+        val releaseName = GradleVersionGetter.version()
+        if (releaseName != null) {
             val currentVersion = Helper.getCurrentVersion()
-            if (releaseName == null) {
-                System.out.println("Unable to fetch latest version of gradle. Please file an issue on GitHub")
-                return
-            }
             if (currentVersion == releaseName) {
-                System.out.println("GradleSite wrapper is already on latest version: $releaseName")
+                System.out.println("Gradle wrapper is already on latest version: $releaseName")
             } else {
                 System.out.println("Updating wrapper to version $releaseName")
 
