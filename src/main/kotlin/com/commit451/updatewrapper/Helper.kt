@@ -40,7 +40,7 @@ internal object Helper {
         val key = "Gradle "
         val startIndex = text.indexOf(key)
         val endIndex = text.indexOf("\n", startIndex)
-        return text.substring(startIndex + key.length, endIndex)
+        return text.substring(startIndex + key.length, endIndex).trim()
     }
 
     private fun windows(): Boolean {
